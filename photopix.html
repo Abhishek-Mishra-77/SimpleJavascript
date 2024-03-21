@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html+css+java</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            width: 100%;
+            height: 90vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('https://cdn.pixabay.com/photo/2015/02/09/14/31/blonde-629726_960_720.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 80px;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-family: sans-serif;
+            font-size: 25px;
+        }
+
+        .logo span {
+            color: red;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+
+        .menu a:first-child {
+            color: red;
+        }
+
+        .menu a:hover {
+            color: red;
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
+        .icon i:hover {
+            color: red;
+        }
+
+        .icon a {
+            text-decoration: none;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            margin-left: 30px;
+            border-radius: 5px;
+        }
+
+        .h-text {
+            color: white;
+            max-width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #camera {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .h-text h1 {
+            font-family: sans-serif;
+            font-size: 3em;
+            line-height: 1.5em;
+        }
+
+        .h-text input {
+            width: 60%;
+            padding: 20px;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            border-radius: 8px;
+        }
+
+        .h-text button {
+            width: 30%;
+            padding: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 20px;
+            margin-top: 30
+        }
+
+        .filter-gallery {
+            padding: 100px;
+        }
+
+        .portfolio-menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-menu ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 20px 0px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: sans-serif;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: 0.5s ease;
+            text-align: center;
+
+        }
+
+        .portfolio-menu ul li:hover {
+            color: white;
+            background-color: red;
+            border-radius: 8px;
+        }
+
+        li.active {
+            color: white;
+            background-color: red;
+            border-radius: 8px;
+        }
+
+        .portfolio-item {
+            width: 100%;
+            margin-left: 80px;
+
+        }
+
+        .portfolio-item .item {
+            width: 360px;
+            height: 360px;
+            float: left;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .portfolio-item .item img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .member {
+            width: 100%;
+            font-family: sans-serif;
+            padding: 20px 100px;
+        }
+
+        .member-info {
+            text-align: center;
+
+        }
+
+        .member-info img:hover {
+            transform: scale(1.5);
+        }
+
+        .member-info h1 {
+            font-size: 2.5em;
+        }
+
+        .member-info h1 span {
+            color: red;
+        }
+
+        .member-card {
+            text-align: center;
+            padding-top: 50px;
+            width: 50%;
+            margin: auto;
+        }
+
+        .member-card img {
+            padding: 12px;
+            font-size: 22px;
+        }
+
+        .member-card img:hover {
+            transform: scale(1.7);
+        }
+
+        .member-card p {
+            margin: 20px 0px;
+            line-height: 2em;
+        }
+
+        .member-card h2 {
+            margin: 20px 0px;
+        }
+
+        #myimage {
+            border-radius: 50%;
+        }
+
+        .m-images {
+            width: 100%;
+            display: flex;
+            margin: 20px 0px;
+            overflow: hidden;
+            margin-left: 10%;
+        }
+
+        .m-images img {
+            width: 177px;
+            height: 177px;
+            cursor: pointer;
+            border-radius: 27px;
+            transition: 0.4s ease-in-out;
+        }
+
+        .m-images img:hover {
+            transform: scale(1.7);
+        }
+
+        footer {
+            width: 100%;
+            background-color: #262626;
+            padding: 50px 100px;
+        }
+
+        .newsletter {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: white;
+        }
+
+        .newsletter>div {
+            flex-basis: 50%;
+        }
+
+        .ntext {
+            text-align: right;
+        }
+
+        .newsletter h2 {
+            font-size: 2em;
+            font-family: sans-serif;
+        }
+
+        .newsletter p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .newsletter label {
+            position: relative;
+        }
+
+        .newsletter input {
+            padding: 20px;
+            width: 70%;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-family: sans-serif;
+        }
+
+        .newsletter button {
+            position: absolute;
+            right: 0;
+            padding: 20px;
+            width: 30%;
+            background-color: red;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .f-contact {
+            color: white;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .f-contact>div {
+            flex-basis: 20px;
+        }
+
+        .f-contact P {
+            line-height: 2em;
+            font-size: 20px;
+            color: gray;
+            cursor: pointer;
+        }
+
+        .f-contact p:hover {
+            color: white;
+        }
+
+        .f-contact i {
+            background-color: white;
+            color: black;
+            padding: 10px;
+            font-size: 16px;
+            margin: 20px 5px;
+            border-radius: 50%;
+            transition: 0.4s ease;
+        }
+
+        .f-contact i:hover {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                Photo<span>pi</span>X
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Gallery</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="icon">
+                <i class="fa fa-search"></i>
+                <a href="#">Login</a>
+            </div>
+
+        </nav>
+
+        <section class="h-text">
+            <i class="fa fa-camera" id="camera"></i>
+            <h1 data-aos="fade-up">Capturing the moments that captivates your heart.</h1>
+            <input type="text" name="" placeholder="Search here...">
+            <button><i class="fa fa-search"></i></button>
+
+        </section>
+    </header>
+
+    <section class="filter-gallery">
+        <div class="portfolio-menu">
+            <ul>
+                <li class="active" data-filter="*">All</li>
+                <li data-filter=".nature">Nature</li>
+                <li data-filter=".fashion">fashion</li>
+                <li data-filter=".wedding">wedding</li>
+            </ul>
+        </div>
+        <div class="portfolio-item">
+            <div class="item nature" data-aos="flip-left" data-aos-offset="100" data-aos-delay="100">
+                <img src="https://cdn.pixabay.com/photo/2017/02/05/15/04/stones-2040340__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item fashion" data-aos="flip-left" data-aos-offset="100" data-aos-delay="200">
+                <img src="https://cdn.pixabay.com/photo/2017/04/06/11/24/fashion-2208045__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item wedding" data-aos="flip-left" data-aos-offset="100" data-aos-delay="300">
+                <img src="https://cdn.pixabay.com/photo/2021/08/03/21/20/woman-6520542__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item nature" data-aos="zoom-in" data-aos-offset="100" data-aos-delay="100">
+                <img src="https://cdn.pixabay.com/photo/2021/08/12/02/43/indian-6539738__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item fashion" data-aos="zoom-in" data-aos-offset="100" data-aos-delay="200">
+                <img src="https://cdn.pixabay.com/photo/2017/03/20/15/13/wrist-watch-2159351__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item wedding" data-aos="zoom-in" data-aos-offset="100" data-aos-delay="300">
+                <img src="https://cdn.pixabay.com/photo/2018/11/29/19/38/couple-3846355__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item nature" data-aos="zoom-in-up" data-aos-offset="100" data-aos-delay="100">
+                <img src="https://cdn.pixabay.com/photo/2017/04/05/17/50/tipi-2205847__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item fashion" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="200">
+                <img src="https://cdn.pixabay.com/photo/2013/11/14/12/34/neckies-210347__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item wedding" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="300">
+                <img src="https://cdn.pixabay.com/photo/2018/05/31/07/53/marriage-3443337__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item nature" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="100">
+                <img src="https://cdn.pixabay.com/photo/2021/04/06/06/23/agriculture-6155388__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item fashion" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="200">
+                <img src="https://cdn.pixabay.com/photo/2017/12/06/20/23/accessory-3002608__340.jpg" width="100"
+                    height="100">
+            </div>
+
+            <div class="item wedding" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="300">
+                <img src="https://cdn.pixabay.com/photo/2021/08/24/11/36/indian-6570410__340.jpg" width="100"
+                    height="100">
+            </div>
+        </div>
+    </section>
+
+    <section class="member" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="300">
+        <div class="member-info" data-aos="zoom-in-up" data-aos-offset="177" data-aos-delay="100">
+            <h1> Our<span>Information</span></h1>
+            <p>What our member says </p>
+        </div>
+        <div class="member-card" data-aos="zoom-in-down" data-aos-offset="177" data-aos-delay="200">
+            <img width="200px" height="200px" src="https://cdn.pixabay.com/photo/2013/07/13/12/16/cup-159523__340.png">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit consectetur deserunt
+                voluptatum sed asperiores architecto modi esse praesentium, corporis adipisci expedita soluta,
+                quae minima rem a sequi vero, ipsam ducimus.</p>
+
+            <h2>
+                *Abhishek mishra
+            </h2>
+            <img src="https://cdn.pixabay.com/photo/2015/08/03/13/58/whatsapp-873316__340.png" width="100">
+            <img src="https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266__340.jpg" width="100">
+            <img src="https://cdn.pixabay.com/photo/2015/07/13/07/41/icons-842893__340.png" width="100">
+            <img src="https://cdn.pixabay.com/photo/2015/03/10/17/30/twitter-667462__340.png" width="100">
+        </div>
+
+        <div class="m-images" data-aos="zoom-in" data-aos-offset="177" data-aos-delay="100">
+            <img src="https://cdn.pixabay.com/photo/2020/11/07/06/07/man-5719960__340.png" alt="">
+            <img src="https://cdn.pixabay.com/photo/2020/11/16/04/36/ranveer-singh-5747939__340.png" alt="">
+            <img src="https://cdn.pixabay.com/photo/2017/09/23/17/29/deepika-padukone-2779557__340.jpg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2022/05/21/11/04/johnny-lever-7211242__340.png" alt="">
+            <img src="https://cdn.pixabay.com/photo/2019/04/16/15/38/indian-4132033__340.jpg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2015/05/28/05/03/portrait-787522__340.jpg" alt="">
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="newsletter">
+            <div data-aos="fade-up" data-aos-offset="177" data-aos-delay="200">
+                <h2>Follow our newsletter</h2>
+                <p>We're a team of non-cynics who truly care for our work.</p>
+            </div>
+
+            <div class="ntext" data-aos="fade-up-right" data-aos-offset="177" data-aos-delay="100">
+                <label>
+                    <input type="text" placeholder="Enter your Email">
+                    <button>Subscribes</button>
+                </label>
+            </div>
+        </div>
+
+        <div class="f-contact" data-aos="zoom-in-up" data-aos-offset="200" data-aos-delay="100">
+            <div>
+                <h1>Information</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, nam id sequi corrupti
+                    dolor vero vel, magnam saepe.
+                </p>
+                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-square-instagram"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+
+            <div>
+                <h1>Useful links</h1>
+                <p>About us</p>
+                <p>Gallery</p>
+                <p>Blog posts</p>
+                <p>Pricing plants</p>
+            </div>
+
+            <div>
+                <h1>Details</h1>
+                <p>Photographers</p>
+                <p>About</p>
+                <p>Blog posts</p>
+                <p>Pricing plants</p>
+            </div>
+            <div>
+                <h1>Help 7 Support</h1>
+                <p>Privacy policy</p>
+                <p>Term & conditions</p>
+                <p>Technical support</p>
+                <p>Costmer care</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script type="text/javascript">
+        $('.portfolio-item').isotope({
+            // options
+            itemSelector: '.item',
+            layoutMode: 'fitRows'
+        });
+        $('portfolio-menu ul li').click(function () {
+            $('portfolio-menu ul li').removeclass('active');
+            $(this).addClass('active');
+        });
+
+        var selector = $(this).attr('data-filter');
+        $('portfolio-item').isotope({
+            filter: selector
+        });
+        return false;
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

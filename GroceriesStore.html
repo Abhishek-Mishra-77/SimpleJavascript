@@ -1,0 +1,344 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <style>
+        .navBar {
+            width: 100%;
+            background-color: #28a745;
+            height: 77px;
+            font-size: 35px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+            border-radius: 10px;
+        }
+
+        body {
+            background-color: #00539C;
+        }
+
+        .navBar div {
+            padding: 7px 50px 50px 10px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-width:370px) {
+            .navBar {
+                font-size: 22px;
+            }
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+
+        body {
+            padding: 0;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .form-control1 {
+            width: 40%;
+            float: right;
+        }
+
+        #main {
+            max-width: 600px;
+            background-color: #2F3C7E;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+            border-radius: 10px;
+        }
+
+        @media screen and (max-width:790px) {
+            #main {
+                max-width: 400px;
+            }
+        }
+
+
+        @media screen and (max-width:790px) {
+            #main {
+                max-width: fit-content;
+            }
+        }
+
+
+        #filter {
+            width: 77%;
+            margin-top: 10%;
+        }
+
+        #addForm input {
+
+            background: cadetblue;
+            font-size: 20px;
+            align-items: center
+        }
+
+        ul {
+            color: black;
+            padding: 16px 10px;
+        }
+
+        ul li {
+            margin-top: 30px;
+            color: black;
+            align-items: center;
+            font-weight: bold;
+            list-style: none;
+
+        }
+    </style>
+</head>
+</head>
+
+
+<!-- NavBar  -->
+
+<nav class="navBar">
+    <div>Groceries Items</div>
+</nav>
+
+
+<!-- Main container Where Items are present -->
+
+<div class="container">
+    <div id="main" class="card card-body">
+        <h2 class="title text-light">Add Items</h2>
+        <form id="addForm" class="form-inline mb-3">
+            <input type="text" class="form-control mr-2 my-2" id="item" placeholder="ItemName">
+            <input type="text" class="form-control my-2" id="description" placeholder="Description">
+            <input type="text" class="form-control mr-2 my-2" id="Price" placeholder="Price">
+            <input type="text" class="form-control my-2" id="Quantity" placeholder="Quantity">
+            <input type="submit" class="btn btn-dark my-3">
+        </form>
+        <h2 class="title text-light">Items</h2>
+
+
+        <!-- Unoredered List for addind list -->
+
+        <ul id="items"></ul>
+
+    </div>
+</div>
+
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script>
+        const details = document.getElementById('addForm');
+        const item = document.getElementById('item');
+        const description = document.getElementById('description');
+        const Price = document.getElementById('Price');
+        const Quantity = document.getElementById('Quantity');
+        const items = document.getElementById('items');
+        details.addEventListener(('submit'), myFormAlldetails);
+
+        // Main creation 
+        async function myFormAlldetails(event) {
+            event.preventDefault();
+
+            const obj = {
+                ItemName: item.value,
+                Itemdescription: description.value,
+                ItemPrice: Price.value,
+                ItemQuantity: Quantity.value,
+            }
+
+            try {
+                const response = await axios.post('https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems', obj)
+                addItems(response.data)
+            }
+            catch (error) {
+                console.log(error);
+            }
+
+        }
+
+        // To Add Groceries Item
+        function addItems(obj) {
+            const li = document.createElement('li');
+            // li.id = obj._id;
+            // console.log(li.id);
+            //li.appendChild(document.createTextNode(`${obj.ItemName} ${obj.Itemdescription} ${obj.ItemPrice} ${obj.ItemQuantity}`))
+            //li.appendChild(document.createTextNode(`<span>${obj.ItemName}</span> <span>${obj.Itemdescription}</span> <span>${obj.ItemPrice}</span> <span class="qty">${obj.ItemQuantity}</span>`));
+            li.innerHTML = `<span>${obj.ItemName}</span> -<span>${obj.Itemdescription}</span>-<span>${obj.ItemPrice}Rs</span> -<span class="qty">${obj.ItemQuantity}</span>qty`;
+
+            li.appendChild(BuyBtnOne(obj));
+            li.appendChild(BuyBtnTwo(obj));
+            li.appendChild(BuyBtnThree(obj));
+            li.appendChild(deleteBtn(obj));
+            items.appendChild(li);
+            item.value = '';
+            description.value = '';
+            Price.value = '';
+            Quantity.value = '';
+
+
+        }
+
+
+
+        // Buy 1 Button
+        function BuyBtnOne(obj) {
+
+            const btn1 = document.createElement('input')
+            btn1.type = 'button'
+            btn1.style.background = 'green'
+            btn1.style.color = 'black'
+            btn1.style.marginLeft = '15px'
+            btn1.style.marginTop = '15px'
+            btn1.value = 'BUY 1'
+
+            btn1.onclick = async () => {
+                const id1 = obj._id;
+                const listItem = btn1.parentNode;
+
+                try {
+                    if (obj.ItemQuantity > 0) {
+                        const response = await axios.put(`https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems/${id1}`, { ItemName: obj.ItemName, Itemdescription: obj.Itemdescription, ItemPrice: obj.ItemPrice, ItemQuantity: obj.ItemQuantity })
+                        obj.ItemQuantity = obj.ItemQuantity - 1;
+                        const qtyEl = listItem.querySelector(`.qty`)
+                        qtyEl.innerHTML = obj.ItemQuantity;
+                    }
+                    else {
+                        alert('Items out of stock!');
+                    }
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            }
+
+            return btn1;
+        }
+
+        // Buy 2 Button 
+
+        function BuyBtnTwo(obj) {
+
+            const btn2 = document.createElement('input')
+            btn2.type = 'button'
+            btn2.style.background = 'green'
+            btn2.style.color = 'black'
+            btn2.style.marginLeft = '15px'
+            btn2.style.marginTop = '15px'
+            btn2.value = 'BUY 2'
+
+            btn2.onclick = async () => {
+                try {
+                    const id2 = obj._id;
+                    const listItem = btn2.parentNode;
+                    if (obj.ItemQuantity > 0) {
+                        const response = await axios.put(`https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems/${id2}`, { ItemName: obj.ItemName, Itemdescription: obj.Itemdescription, ItemPrice: obj.ItemPrice, ItemQuantity: obj.ItemQuantity - 2 })
+                        obj.ItemQuantity = obj.ItemQuantity - 2;
+                        const qtyE2 = listItem.querySelector('.qty');
+                        qtyE2.innerHTML = obj.ItemQuantity;
+                    }
+                    else {
+                        alert('Items out of stock')
+                    }
+                }
+                catch (error) {
+                    console.log(error);
+                }
+
+            }
+            return btn2;
+        }
+
+        // Buy 1 Button
+
+        function BuyBtnThree(obj) {
+
+            const btn3 = document.createElement('input')
+            btn3.type = 'button'
+            btn3.style.background = 'green'
+            btn3.style.color = 'black'
+            btn3.style.marginLeft = '15px'
+            btn3.style.marginTop = '15px'
+            btn3.value = 'BUY 3'
+
+            btn3.onclick = async () => {
+                const id3 = obj._id;
+                const listItem = btn3.parentNode;
+                try {
+                    if (obj.ItemQuantity > 0) {
+
+                        const response = await axios.put(`https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems/${id3}`, { ItemName: obj.ItemName, Itemdescription: obj.Itemdescription, ItemPrice: obj.ItemPrice, ItemQuantity: obj.ItemQuantity - 3 })
+                        obj.ItemQuantity = obj.ItemQuantity - 3;
+                        const qtyE3 = listItem.querySelector('.qty');
+                        qtyE3.innerHTML = obj.ItemQuantity;
+                    }
+                    else {
+                        alert('Items out of stock')
+                    }
+                }
+                catch (error) {
+                    console.log(error)
+                }
+
+            }
+
+            return btn3;
+        }
+
+        function deleteBtn(obj) {
+            const deleteBtn = document.createElement('input')
+            deleteBtn.type = 'button';
+            // deleteBtn.value = '❌'
+            deleteBtn.value = 'Delete Item'
+            deleteBtn.style.background = 'red'
+            deleteBtn.style.color = 'black'
+            deleteBtn.style.marginLeft = '15px'
+            const id = obj._id;
+
+            deleteBtn.onclick = async () => {
+                try {
+                    const ListItem = deleteBtn.parentNode;
+                    const response = await axios.delete(`https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems/${id}`)
+                    items.removeChild(ListItem);
+                }
+                catch (error) {
+                    console.log(error);
+                }
+
+            }
+            return deleteBtn;
+        }
+
+        // When we refresh the window
+
+        window.addEventListener(('load'), BrowserRefresh);
+        async function BrowserRefresh() {
+            try {
+                const response = await axios.get('https://crudcrud.com/api/1fd89c4e35014cab911c88393f76ae6e/GroceriesItems')
+                for (var i = 0; i < response.data.length; i++) {
+                    const data = response.data[i];
+                    addItems(data)
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

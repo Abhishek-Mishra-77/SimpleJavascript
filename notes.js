@@ -1,0 +1,14 @@
+// 1 https://crudcrud.com/
+// 2 https://github.com/
+// 3 https://chat.openai.com/
+// 4 https://student.sharpener.tech/dashboard
+// 5 https://newsapi.org/
+// 6 https://overapi.com/
+// 7 https://leetcode.com/
+// 8 https://www.linkedin.com/in/abhishek-mishra-342494237/
+// 9 https://replit.com/~
+// 10 https://traya.health/?utm_source=google&utm_medium=cpc&utm_campaign=TOF-Youtube-YT-inmarketaudiences-male-hindi-22102022&utm_content=ranveer-script-4&kw=&campaignid=19000075419&adgroupid=147355409681&adid=653343222218&gclid=CjwKCAjw0N6hBhAUEiwAXab-TWvz8c_FvqOf-ed-uh24QcLyJo3NjGhDpEsPS7JLiVA99FDOu0SSNRoCXlIQAvD_BwE
+// 11 https://webveda.ankurwarikoo.com/path-player?courseid=effective-communication-premium&unit=63cc1d49ff5eb468886f2144Unit
+// 12 https://cdnjs.com/libraries/axios
+// 13 https://getbootstrap.com/docs/5.3/getting-started/introduction/
+// 14 https://be10x.in/ai-tools-ga3/?gclid=CjwKCAjw04yjBhApEiwAJcvNoSKQnnheWCbrM2iTgmlP9h-NdaGyzb_s_txaG3s4xf4qQc7uDRkJThoCwb4QAvD_BwE

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking appointment App</title>
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            padding: 5px;
+            background-color: #f4f4f4;
+            margin: 5px 0;
+        }
+
+        header {
+            background-color: grey;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            margin: auto;
+            width: 500px;
+            overflow: auto;
+            padding: 3rem 2rem;
+        }
+
+        #my-form {
+            padding: 2rem;
+            background-color: gray;
+            border-radius: 12px;
+        }
+
+        #my-form label {
+            display: block;
+        }
+
+        #my-form input[type='text'] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 15px;
+            border: 0;
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .btn:hover {
+            background-color: #444;
+        }
+
+        .bg-dark {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .error {
+            background-color: orangered;
+            color: #fff;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Booking appointment App</h1>
+    </header>
+
+    <section class="container">
+        <form id="my-form">
+            <h1>Add User</h1>
+            <div class="msg"></div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="mail">
+            </div>
+
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="text" id="number" name="number">
+            </div>
+
+            <input type="submit" class="btn" id="btn" value="Submit">
+
+        </form>
+
+        <ul id="users">
+            <!-- <li class="item delete">Item1</li>
+                <li class="item delete">Item2</li>
+                <li class="item delete">Item3</li>
+                <li class="item delete">Item4</li> -->
+        </ul>
+
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const myForm = document.querySelector('#my-form');
+        const nameInput = document.querySelector('#name');
+        const emailInput = document.querySelector('#email');
+        const numberInput = document.querySelector('#number');
+        const msg = document.querySelector('.msg');
+        const userList = document.querySelector('#users');
+
+        // Main function Event listener
+        myForm.addEventListener(('submit'), MainFunction);
+
+        // Main function 
+        function MainFunction(event) {
+            event.preventDefault();
+
+            const name = nameInput.value;
+            const Email = emailInput.value;
+            const number = numberInput.value;
+
+            const obj = {
+                name,
+                Email,
+                number
+            }
+
+            axios.post('https://crudcrud.com/api/ca23d8bdab3847cabb39b704a45710b4/CrudeCrude2', obj)
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+
+            addAllData(obj);
+
+        }
+
+
+
+
+        // Function for create li And Append all data in the browser
+        function addAllData(obj) {
+            console.log(obj)
+
+            if (nameInput.value === '' || emailInput.value === '' || numberInput.value === '') {
+                msg.style.background = 'red';
+                msg.innerHTML = 'Please feel all the details'
+                setTimeout(() => {
+                    msg.remove()
+                }, 10000)
+            }
+            else {
+                const li = document.createElement('li');
+                li.appendChild(document.createTextNode(`${nameInput.value} - ${emailInput.value} - ${numberInput.value} `))
+                li.append(deleteItem(), "    ")
+                li.append(editItem(obj), " ");
+                userList.appendChild(li)
+
+                nameInput.value = ' ';
+                emailInput.value = ' '
+                numberInput.value = ' '
+            }
+        }
+
+
+        // function for Edit Button from browser
+
+        function editItem(obj) {
+            const editbtn = document.createElement('input')
+            editbtn.type = 'button'
+            editbtn.value = 'Edit'
+            editbtn.onclick = () => {
+                nameInput.value = obj.name;
+                emailInput.value = obj.Email;
+                numberInput.value = obj.number;
+                const parentElemet = editbtn.parentNode;
+                userList.removeChild(parentElemet)
+            }
+
+            return editbtn;
+        }
+
+
+        // Function for delete li from browser
+
+        function deleteItem() {
+            const deletebtn = document.createElement('input')
+            deletebtn.type = 'button'
+            deletebtn.value = 'Delete'
+
+            // Function for onclick in the delete button li from browser
+            deletebtn.onclick = () => {
+                const parentElemet = deletebtn.parentNode;
+                userList.removeChild(parentElemet)
+            }
+
+            return deletebtn;
+        }
+
+
+        // After refresh the browser data steal remain in the browser and along with the postmanApi
+
+
+
+
+    </script>
+
+</body>
+
+</html>
